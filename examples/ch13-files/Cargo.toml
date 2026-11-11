@@ -1,0 +1,10 @@
+[package]
+name = "ch13-files"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "ch13-files"
+path = "src/main.rs"
+
+[dependencies]

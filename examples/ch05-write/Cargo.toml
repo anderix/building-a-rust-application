@@ -1,0 +1,10 @@
+[package]
+name = "ch05-write"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "ch05-write"
+path = "src/main.rs"
+
+[dependencies]

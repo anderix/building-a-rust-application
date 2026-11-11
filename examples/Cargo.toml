@@ -1,0 +1,17 @@
+# The program at eleven points in its history. Each member is a
+# complete, runnable ved: `cargo run -p ch05-write -- -p '* '`.
+[workspace]
+resolver = "3"
+members = [
+    "ch02-repl",
+    "ch03-buffer",
+    "ch04-addresses",
+    "ch05-write",
+    "ch07-pike",
+    "ch08-bre",
+    "ch10-substitute",
+    "ch11-editing",
+    "ch12-global",
+    "ch13-files",
+    "ved",
+]

@@ -1,0 +1,26 @@
+[book]
+title = "Building a Rust Application"
+description = "From an empty directory to a program people install — a complete application, built in slices."
+authors = ["David Anderson"]
+language = "en"
+src = "src"
+
+[output.html]
+site-url = "/rust/building/"
+default-theme = "light"
+preferred-dark-theme = "navy"
+no-section-label = false
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.playground]
+editable = false
+copyable = true
+
+[build]
+create-missing = false
+
+[rust]
+edition = "2024"

@@ -1,0 +1,10 @@
+[package]
+name = "ch08-bre"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "ch08-bre"
+path = "src/main.rs"
+
+[dependencies]
