@@ -190,13 +190,57 @@ README now tells them what to do, and the README is the one place they are
 unlikely to look. The only message that reaches a user of a dead channel is
 one sent before it dies.
 
-**What the tracker still holds.** #36 lists the differences the harness still
-finds, and #38 the `l` escapes. Both were filed after the branch was planned
-and are for the next release. Shipping with known open issues is the normal
-case, and the useful property is that they are known, written down, and
-linked from the chapter that found them.
+**What the tracker still held.** #36 listed the differences the harness still
+found, and #38 the `l` escapes. Both were filed after the branch was planned,
+so 0.4.0 shipped with them open, which is the normal case. The useful
+property is that they were known, written down, and linked from the chapter
+that found them, which is what made the next section short.
 
-## 22.6 The loop
+## 22.6 0.4.1
+
+The two open issues were fixed the same night, on a second branch merged as
+pull request #39, and released as 0.4.1. A patch release, because nothing in
+it adds a command; it makes five existing behaviors match the reference.
+
+#36 turned out to have three causes, none of them the one its description guessed.
+The `g` and `j` case was not about `g`: `+1m-1` from line 1 failed because an
+offset that landed on 0 was rejected even where 0 is a valid address. An `s`
+with an invalid address was recorded for a bare `s` to repeat, because ved
+parsed the command before it resolved the address, where ed does the
+reverse. And `,` on an empty buffer was rejected for `a` and `i`, where POSIX
+bounds only the final address, which there is 0. Each was a commit with a
+test whose expected values came from GNU ed's output, and after them the
+harness, run without its empty-match command, finds 3 differing scripts in
+3,000.
+
+All three are one case: `m` to the last line of its own range, such as
+`1m1`. GNU ed accepts that as a move that changes nothing. POSIX says it is
+an error "if address falls within the range of moved lines," and Seventh
+Edition ed rejects it, so ved does too, and #36 closed with that decision
+written on it. A harness that ends at a short list of differences, each with
+a reason, is a harness that has done its job; it was never going to end at
+zero, because the reference is not the specification.
+
+#38 made `l` write `\t`, `\r`, and the other escapes POSIX names, and fold
+long lines. POSIX leaves the folding width open, so ved folds where GNU ed
+does, measured by running it on lines of 75, 76, and 77 characters, and the
+output now matches GNU ed's byte for byte, folds included. The test that had
+held the octal tab in place was replaced by one whose expected value is GNU
+ed's output.
+
+Two of the commit subjects began with a command, `l` and `,`, and would have
+come out of the release-notes generator as "L writes" and ", on an empty
+buffer." They were reworded to begin with a word before the branch was
+pushed, which is section 22.4's lesson applied once, and 0.4.1's notes read
+correctly as generated.
+
+The WinGet pull request for 0.4.0 was still waiting for a moderator. Only the
+current version is owed a manifest, so it was closed and 0.4.1 submitted in
+its place, with the description from `Cargo.toml`. A Windows user goes from
+0.3.0 to 0.4.1 directly, and loses nothing by skipping a version they never
+had.
+
+## 22.7 The loop
 
 The loop chapter 19 described, someone reads the program closely, writes down
 what is wrong, and the list goes into the place where lists get done, has now
@@ -217,10 +261,10 @@ release is chapter 17's, run by the tools chapter 19 described. What the loop
 adds is the habit of going around it: of treating the close reading as the
 start of the work rather than the end of it.
 
-ved 0.4.0 is a better program than 0.3.0 in the ways chapter 20 listed, and it
-still has bugs. Some are in #36 and #38. The rest are in the commands nobody
-has read closely yet, which is where chapter 20 said they would be, waiting
-for the next person who explains the code to somebody in writing.
+ved 0.4.1 is a better program than 0.3.0 in the ways chapter 20 listed, and its
+tracker has no open issues. It still has bugs. They are in the commands nobody
+has read closely yet, which is where chapter 20 said they would be, waiting for
+the next person who explains the code to somebody in writing.
 
 ---
 

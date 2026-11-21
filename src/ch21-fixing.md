@@ -467,10 +467,10 @@ Measured on the result, against 0.3.0:
 | Fuzzer panics in a million runs | 0 | 0 |
 
 All 99 remaining single-command differences are `s/[ab]*/-/g`, the case where
-GNU ed refuses and ved follows the Seventh Edition. Of the 180, 84 are the
-same case; the rest are filed as #36, with the two causes the harness points
-at. The harness numbers use seed 1, so they are comparable with each other
-and not with chapter 15's, which used a different one.
+GNU ed refuses and ved follows the Seventh Edition. Of the 180, 84 are the same
+case; the rest were filed as #36, and section 22.6 is about what they turned
+out to be. The harness numbers use seed 1, so they are comparable with each
+other and not with chapter 15's, which used a different one.
 
 The test count rose by 40, and the bugs fixed number 21. That ratio is the
 procedure in section 21.1 made visible: every fix began with a test that
@@ -500,6 +500,7 @@ section 20.7, and either fix ved or write down why it differs.
 cannot write files. Add `E` and `r` with filenames from a fixed set of paths
 inside a temporary directory, run it, and report what it finds.
 
-**Exercise 21-5.** Implement #38: `l` writes `\t`, `\r`, and the other C
-escapes POSIX names, and folds long lines. Decide the folding width, and
-write down why.
+**Exercise 21-5.** Implement #38 in `examples/ch21-fixed`: `l` writes `\t`,
+`\r`, and the other C escapes POSIX names, and folds long lines. Decide the
+folding width and write down why, then compare your version with ved 0.4.1's,
+which section 22.6 describes.
