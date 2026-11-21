@@ -45,12 +45,12 @@ crate and move on".
 
 ## What is written so far
 
-Chapters 1 to 17 are here: from an empty directory to a working editor with
+Chapters 1 to 18 are here: from an empty directory to a working editor with
 addresses, a command loop, its own regular expression engine, the commands
 that change text and move lines, the global command, files, what the program
-says, how it is tested and documented, and how it is released. Chapters 18 and
-19 and the appendices are still being written, and they show in the contents
-without links until they are done. Where a chapter here refers ahead to one of
+says, how it is tested and documented, and how it is released and packaged.
+Chapter 19 and the appendices are still being written, and they show in the
+contents without links until they are done. Where a chapter here refers ahead to one of
 them, it is describing a chapter still to come.
 
 ## How the program is built

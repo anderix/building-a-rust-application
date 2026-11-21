@@ -19,7 +19,7 @@
 - [Testing](ch15-testing.md)
 - [Documentation](ch16-documentation.md)
 - [Release](ch17-release.md)
-- [Packaging]()
+- [Packaging](ch18-packaging.md)
 - [Living With It]()
 
 ---

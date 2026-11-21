@@ -97,8 +97,8 @@ supported Rust version. Without it, Cargo has no way to tell a user that their
 compiler is too old except by failing to compile.
 
 Chapter 1 said `edition = "2024"` sets the minimum compiler version to 1.85,
-and the README says ved needs *a Rust toolchain recent enough for the edition
-`Cargo.toml` names*. Both statements are true of the edition. They are not true
+and the 0.2.1 README's build instructions say the same, *1.85+ for edition
+2024*. Both statements are true of the edition. They are not true
 of ved 0.2.1:
 
 ```text
