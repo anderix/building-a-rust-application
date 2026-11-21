@@ -11,7 +11,7 @@
 - [A Regex Engine: The Recursive Matcher](ch07-pike.md)
 - [A Regex Engine: Compiling the Pattern](ch08-compiling.md)
 - [A Regex Engine: Groups and Backreferences](ch09-groups.md)
-- [Substitute]()
+- [Substitute](ch10-substitute.md)
 - [Commands That Move Lines]()
 - [The Global Command]()
 - [Files, and the Outside World]()

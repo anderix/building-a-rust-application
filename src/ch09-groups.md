@@ -350,7 +350,8 @@ than characters, and it can be made to run for half an hour by a fifty-byte
 pattern. Three of those four are written down in the module comment or the
 backlog. The one that was not is the one that corrupts data.
 
-Slice 5b, next chapter, is forty lines that connect it to the `s` command.
+Slice 5b, next chapter, is the two hundred lines that connect it to the `s`
+command.
 
 ---
 
