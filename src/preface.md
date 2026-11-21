@@ -26,8 +26,9 @@ The book builds one program the whole way through, and it is a real one.
 lines of Rust in five modules, it has no dependencies at all, it compiles in
 half a second, and it ships on crates.io, in a Debian apt repository, and
 through WinGet. Chapters 1 to 18 describe release 0.2.1, the code people
-installed in the autumn of 2026, and chapter 19 is about 0.3.0, the release
-that followed it.
+installed in the autumn of 2026. Chapter 19 is about 0.3.0, the release that
+followed it, and chapters 20 to 22 about 0.4.0, the release that fixed what
+this book found.
 
 It was chosen for three reasons. It is small enough to show completely, so
 nothing is hand-waved. It is old enough in design to have a specification
@@ -68,12 +69,13 @@ have.
 They are part of the story, because finding what is wrong with a program you
 have shipped is part of building one. Each is told in the chapter that found
 it, at the point where it was found, with a link to the issue in ved's tracker.
-Some were fixed before the book was finished, and the chapters say so. The rest
-were open when it was finished, and chapter 19 is about where they went.
+Some were fixed before chapter 19 was written, and the chapters say so.
+Chapter 20 is about the rest, chapter 21 fixes them, and chapter 22 ships the
+fixes.
 
 ## Running the code
 
-The program at twelve points in its history lives under `examples/` in the
+The program at thirteen points in its history lives under `examples/` in the
 [book's repository](https://github.com/anderix/building-a-rust-application),
 one crate per checkpoint, and each one builds and runs:
 
@@ -87,7 +89,8 @@ cargo test
 Not every chapter ends at a checkpoint, because some of the original commits
 covered more than one slice. Where a chapter's code is not its own crate, the
 text says which crate to look in. `ved` is release 0.2.1, the program the first
-eighteen chapters describe, and `ch19-living` is release 0.3.0.
+eighteen chapters describe, `ch19-living` is release 0.3.0, and `ch21-fixed`
+is release 0.4.0.
 
 Type your own version alongside if you want to; that is the best way to read
 this. If yours stops compiling, diff it against the next checkpoint.

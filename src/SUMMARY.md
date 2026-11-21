@@ -21,6 +21,7 @@
 - [Release](ch17-release.md)
 - [Packaging](ch18-packaging.md)
 - [Living With It](ch19-living.md)
+- [Bugs](ch20-bugs.md)
 
 ---
 
