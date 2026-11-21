@@ -18,7 +18,7 @@
 - [The Voice of the Program](ch14-voice.md)
 - [Testing](ch15-testing.md)
 - [Documentation](ch16-documentation.md)
-- [Release]()
+- [Release](ch17-release.md)
 - [Packaging]()
 - [Living With It]()
 

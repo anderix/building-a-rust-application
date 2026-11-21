@@ -48,7 +48,8 @@ crate and move on".
 Chapters 1 to 16 are here: from an empty directory to a working editor with
 addresses, a command loop, its own regular expression engine, the commands
 that change text and move lines, the global command, files, what the program
-says, how it is tested, and how it is documented. Chapters 17 to 19 and the appendices are still
+says, how it is tested and documented, and how it is released. Chapters 18
+and 19 and the appendices are still
 being written, and they show in the contents without links until they are
 done. Where a chapter here refers ahead to one of
 them, it is describing a chapter still to come.
