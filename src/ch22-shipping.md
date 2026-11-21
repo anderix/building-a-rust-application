@@ -42,8 +42,8 @@ was fixed in the repository, but the copies on anderix.com and excelano.com
 are separate files that change only when those sites are deployed, and
 closing the issue before then would have claimed that a reader of either site
 saw the fix. It closed when they were deployed, the same evening. The WinGet
-description (#30) has no commit at all, because it is not in the repository,
-which section 22.5 explains.
+description (#30) has no commit in ved at all, because it is not in ved's
+repository, which section 22.5 explains.
 
 ## 22.3 The release
 
@@ -144,19 +144,34 @@ broke is the one chapter 17 quoted: `fix:` and `feat:` are for changes a user
 would notice, which is a question about the user, not about which files the
 change touches.
 
+Both were corrected the same evening. The GitHub release's notes were edited,
+with each command letter kept lowercase in code style and the two missing
+lines added. The Debian changelog was not, and cannot be: it is inside the
+packages, and a package changes only with a new version. A generated document
+that is wrong in one place is wrong in every place it was copied to before
+anyone read it, and the copies that cannot be edited are the ones to think
+about before the generator runs.
+
 ## 22.5 What the release could not reach
 
-**The WinGet description** (#30). The manifest still calls ved "a drop-in ed
-clone." `ship-winget` builds each new manifest with `komac update`, which
-copies the previous version's description forward, so the text from the
-first submission has been carried into every version since, and 0.4.0 is no
-exception. Fixing it needs either a change to the release tool, so that the
-description comes from `Cargo.toml` at every release, or a manifest edited by
-hand. The fleet's rule is that releases go through the tools and not around
-them, so the issue stays open until the tool can do it. That is the right
-call for a sentence of marketing copy, and it would be the wrong one for a
-security fix; a rule that forbids hand-editing needs to know which it is
-facing.
+**The WinGet description** (#30). The first 0.4.0 manifest still called ved
+"a drop-in ed clone." `ship-winget` builds each manifest with `komac update`,
+which copies the previous version's description forward, so the text from the
+first submission had been carried into every version since, and 0.4.0 was no
+exception. The fix went into the release tool rather than the manifest: for a
+repository with one WinGet package, `ship-winget` now sets the description
+from `Cargo.toml`'s `description` on every submission, so the description has
+one source and a correction reaches WinGet at the next release without anyone
+remembering to make it.
+
+The 0.4.0 pull request was then closed and submitted again with the new tool,
+the same evening, with the corrected description and the corrected notes.
+That broke one of the tool's own rules, one pull request per package per day.
+The rule was the fleet's, not WinGet's, whose guide asks only that a version
+never have two pull requests open at once, and the first one had been closed.
+A rule a project made for itself can be set aside when its reason does not
+apply. Telling the rules a project made from the rules it was given is what
+makes that safe.
 
 **The websites** (#16). The two published copies of the tutorial are not the
 repository's file, so the release did not change them. Each got the same
@@ -192,7 +207,8 @@ whose expected value came from a reference, and a twenty-first, the tutorial,
 closed when the websites were deployed. Two more bugs were found by the tools
 that checked the fixes, and one was introduced by a fix and caught before it
 shipped. The release went out through four channels and verified each, and the
-notes that went with it had two mistakes that the next release can avoid.
+notes that went with it had two mistakes, corrected that evening, that the next
+release can avoid.
 
 None of that needed anything this book has not shown. The tracker is
 chapter 19's. The order is chapter 20's rule. The procedure is chapter 15's
@@ -221,6 +237,7 @@ relied on 0.3.0's behavior, and compare it with the generated notes.
 breaking change for ved after 1.0. Apply it to every commit in 0.4.0 and
 count how many would have required a major version.
 
-**Exercise 22-4.** Design the change to the release tool that #30 needs: where
-the description comes from, and what the tool should do when the published
-manifest disagrees with it.
+**Exercise 22-4.** The fix for #30 takes the description from `Cargo.toml`
+only when a repository ships one WinGet package. Design what a release tool
+should do for a repository that ships several, each with its own
+description, without keeping a second copy of any of them.
