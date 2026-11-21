@@ -25,8 +25,9 @@ The book builds one program the whole way through, and it is a real one.
 `ved` is a clone of `ed`, the original Unix line editor. It is about 2,800
 lines of Rust in five modules, it has no dependencies at all, it compiles in
 half a second, and it ships on crates.io, in a Debian apt repository, and
-through WinGet. The version in this book is the version people
-install.
+through WinGet. Chapters 1 to 18 describe release 0.2.1, the code people
+installed in the autumn of 2026, and chapter 19 is about 0.3.0, the release
+that followed it.
 
 It was chosen for three reasons. It is small enough to show completely, so
 nothing is hand-waved. It is old enough in design to have a specification
@@ -45,11 +46,9 @@ crate and move on".
 
 ## What is written so far
 
-Chapters 1 to 18 are here: from an empty directory to a working editor with
-addresses, a command loop, its own regular expression engine, the commands
-that change text and move lines, the global command, files, what the program
-says, how it is tested and documented, and how it is released and packaged.
-Chapter 19 and the appendices are still being written, and they show in the
+All nineteen chapters are here: from an empty directory to a working editor,
+through testing, documentation, release, and packaging, to what happened after
+it shipped. The appendices are still being written, and they show in the
 contents without links until they are done. Where a chapter here refers ahead to one of
 them, it is describing a chapter still to come.
 
@@ -66,7 +65,7 @@ code.
 
 ## Running the code
 
-The program at eleven points in its history lives under `examples/` in the
+The program at twelve points in its history lives under `examples/` in the
 [book's repository](https://github.com/anderix/building-a-rust-application),
 one crate per checkpoint, and each one builds and runs:
 
@@ -79,7 +78,8 @@ cargo test
 
 Not every chapter ends at a checkpoint, because some of the original commits
 covered more than one slice. Where a chapter's code is not its own crate, the
-text says which crate to look in. The last one, `ved`, is the shipped program.
+text says which crate to look in. `ved` is release 0.2.1, the program the first
+eighteen chapters describe, and `ch19-living` is release 0.3.0.
 
 Type your own version alongside if you want to; that is the best way to read
 this. If yours stops compiling, diff it against the next checkpoint.

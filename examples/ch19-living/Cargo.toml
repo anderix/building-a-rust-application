@@ -1,0 +1,10 @@
+[package]
+name = "ch19-living"
+version = "0.3.0"
+edition = "2024"
+
+[[bin]]
+name = "ch19-living"
+path = "src/main.rs"
+
+[dependencies]

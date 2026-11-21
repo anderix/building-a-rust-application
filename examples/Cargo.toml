@@ -1,4 +1,4 @@
-# The program at eleven points in its history. Each member is a
+# The program at twelve points in its history. Each member is a
 # complete, runnable ved: `cargo run -p ch05-write -- -p '* '`.
 [workspace]
 resolver = "3"
@@ -14,4 +14,5 @@ members = [
     "ch12-global",
     "ch13-files",
     "ved",
+    "ch19-living",
 ]

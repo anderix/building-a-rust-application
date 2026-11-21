@@ -200,8 +200,8 @@ on day one.
 **Commit `Cargo.lock`.** For a program, the lock file records the exact
 dependency versions that were built and tested, so a build six months from now
 is the same build. For a library, the convention is the opposite, because a
-library's lock file is ignored by anything that depends on it. ved has no
-dependencies, so its lock file is four lines, and it is committed anyway.
+library's lock file is ignored by anything that depends on it. ved has no dependencies, so its lock file is seven lines, and it is committed
+anyway.
 
 **Use git from the first commit**, and write commit messages as if someone will
 read them, because in this book somebody does: the example crates were extracted
