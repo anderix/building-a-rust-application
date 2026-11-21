@@ -24,8 +24,8 @@ The book builds one program the whole way through, and it is a real one.
 
 `ved` is a clone of `ed`, the original Unix line editor. It is about 2,800
 lines of Rust in five modules, it has no dependencies at all, it compiles in
-half a second, and it ships on crates.io, in a Debian apt repository, through
-Homebrew, and through WinGet. The version in this book is the version people
+half a second, and it ships on crates.io, in a Debian apt repository, and
+through WinGet. The version in this book is the version people
 install.
 
 It was chosen for three reasons. It is small enough to show completely, so
@@ -43,6 +43,14 @@ every line in this book is a line you can read, including the argument parser
 and the regex engine, and there is no chapter where the answer is "add this
 crate and move on".
 
+## What is written so far
+
+Chapters 1 to 9 are here: from an empty directory to a working editor with
+addresses, a command loop, and its own regular expression engine. Chapters 10
+to 19 and the appendices are still being written, and they show in the contents
+without links until they are done. Where a chapter here refers ahead to one of
+them, it is describing a chapter still to come.
+
 ## How the program is built
 
 ved was built in twelve slices. A slice adds one capability and leaves a
@@ -56,8 +64,9 @@ code.
 
 ## Running the code
 
-The program at eleven points in its history lives under `examples/`, one crate
-per checkpoint, and each one builds and runs:
+The program at eleven points in its history lives under `examples/` in the
+[book's repository](https://github.com/anderix/building-a-rust-application),
+one crate per checkpoint, and each one builds and runs:
 
 ```text
 cd examples
@@ -86,8 +95,8 @@ are open questions in ved's own backlog.
 
 ## The other two books
 
-This is the third of three. *Programming in Rust* teaches the language to
-someone who already programs. *The Rust Thought Process* teaches the model
+This is the third of three. [*Programming in Rust*](/rust/) teaches the language to
+someone who already programs. [*The Rust Thought Process*](/rust/thought-process/) teaches the model
 behind it — ownership as a design question rather than a compiler rule. Either
 one is enough preparation for this book, as is any other careful introduction.
 
