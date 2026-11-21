@@ -278,6 +278,22 @@ said anything that looked wrong. A user who read the plan, or guessed the name
 from `append` and `delete`, gets a file with a strange name, or loses their
 work.
 
+The same mechanism reaches the most common command in ed scripts. `wq`, write
+and quit, is how a great many of them end:
+
+```text
+$ printf 's/hello/bye/\nwq\n' | ved f.txt
+6
+bye
+wrote 4 bytes to q
+```
+
+ved read `wq` as `w` with the filename `q`. It wrote the edited buffer to a new
+file named `q`, left `f.txt` unchanged, did not quit, and exited 0 when its input
+ran out. A script that ends in `wq` runs to completion under ved, reports
+success, and does not change the file it was written to change. GNU ed writes
+`f.txt` and quits.
+
 The cause is in the second stage of the dispatcher, which takes the first
 character of the command as the letter and everything after it as the argument,
 with `trim_start()` removing any space. `w file` and `wfile` are the same

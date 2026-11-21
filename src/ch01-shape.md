@@ -205,7 +205,8 @@ anyway.
 
 **Use git from the first commit**, and write commit messages as if someone will
 read them, because in this book somebody does: the example crates were extracted
-from ved's history, commit by commit. Chapter 16 makes the case that commit
+from ved's history, commit by commit, and Appendix B lists which commit each
+one came from. Chapter 16 makes the case that commit
 messages are the right home for a particular kind of writing that otherwise
 pollutes the source.
 

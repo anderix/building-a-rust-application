@@ -24,6 +24,6 @@
 
 ---
 
-- [Appendix A: The Finished Program]()
-- [Appendix B: The Slices]()
-- [Appendix C: From Empty Directory to Installed]()
+[Appendix A: The Finished Program](appendix-a-program.md)
+[Appendix B: The Slices](appendix-b-slices.md)
+[Appendix C: From Empty Directory to Installed](appendix-c-checklist.md)

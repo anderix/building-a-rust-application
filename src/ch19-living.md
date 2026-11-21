@@ -141,6 +141,7 @@ ones that change what happens to a user's text:
 | `e` discards a modified buffer, and a failed `e` loses it | 13 | still there |
 | A UTF-8 file containing `+ACI-` cannot be saved in place | 13 | still there |
 | `write`, `edit`, and `read` act on files named `rite`, `dit`, `ead` | 14 | still there |
+| `wq` writes a file named `q` and does not quit | 14 | still there |
 | The tutorial teaches `write notes.txt` | 16 | still there |
 
 And the ones that change what a script sees: no `-s` flag, exit status 0 after

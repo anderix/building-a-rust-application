@@ -44,14 +44,6 @@ every line in this book is a line you can read, including the argument parser
 and the regex engine, and there is no chapter where the answer is "add this
 crate and move on".
 
-## What is written so far
-
-All nineteen chapters are here: from an empty directory to a working editor,
-through testing, documentation, release, and packaging, to what happened after
-it shipped. The appendices are still being written, and they show in the
-contents without links until they are done. Where a chapter here refers ahead to one of
-them, it is describing a chapter still to come.
-
 ## How the program is built
 
 ved was built in twelve slices. A slice adds one capability and leaves a
