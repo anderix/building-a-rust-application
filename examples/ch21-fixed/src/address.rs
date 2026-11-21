@@ -1,0 +1,326 @@
+// ed-style address parsing and resolution.
+//
+// Every ed command can be prefixed by an address or an address
+// range. This module turns the front of a command string into a
+// `Spec` (the parsed-but-unresolved form), and resolves a `Spec`
+// against a `Buffer` to produce a concrete `Range` of 1-indexed
+// line numbers.
+//
+// Address forms recognized:
+//   5         absolute line number
+//   .         current line
+//   $         last line
+//   +3        current + 3
+//   -1        current - 1
+//   ,         shorthand for 1,$  (whole buffer)
+//   ;         shorthand for .,$  (current to end)
+//   2,4       a range from line 2 to line 4
+//   .,+5      from current to current+5
+//   /foo/     next line matching foo, searching forward with wraparound
+//   ?foo?     next line matching foo, searching backward with wraparound
+//
+// Compound expressions like $-5 are not supported.
+//
+// Author: David M. Anderson
+// Built with AI assistance (Claude, Anthropic)
+
+use crate::bre;
+use crate::buffer::Buffer;
+
+pub enum Address {
+    Number(usize),
+    Current,
+    Last,
+    Offset(isize),
+    Search { pattern: Vec<u8>, forward: bool },
+}
+
+pub struct Spec {
+    pub start: Option<Address>,
+    pub end: Option<Address>,
+}
+
+pub struct Range {
+    pub start: usize, // 1-indexed, inclusive
+    pub end: usize,   // 1-indexed, inclusive
+}
+
+impl Spec {
+    /// Parse an address spec from the front of `input`. Returns the
+    /// spec and the remaining string (command letter + args).
+    ///
+    /// This does NOT validate that the addresses are in range —
+    /// that's `resolve`'s job. It just tokenizes.
+    pub fn parse(input: &str) -> Result<(Spec, &str), String> {
+        // Handle the two shorthand forms first since they're a
+        // single character standing in for a full range.
+        let bytes = input.as_bytes();
+        if let Some(&first) = bytes.first() {
+            if first == b',' {
+                return Ok((
+                    Spec {
+                        start: Some(Address::Number(1)),
+                        end: Some(Address::Last),
+                    },
+                    &input[1..],
+                ));
+            }
+            if first == b';' {
+                return Ok((
+                    Spec {
+                        start: Some(Address::Current),
+                        end: Some(Address::Last),
+                    },
+                    &input[1..],
+                ));
+            }
+        }
+
+        // Otherwise: parse one address, then optionally a `,` and
+        // a second address.
+        let (start, rest) = parse_one(input)?;
+        if let Some(rest) = rest.strip_prefix(',') {
+            let (end, rest) = parse_one(rest)?;
+            // ed allows a comma with no second address, meaning
+            // "end at the last line". e.g. `5,p` = `5,$p`. Most
+            // people don't use this but it's part of the language.
+            let end = end.or(Some(Address::Last));
+            return Ok((Spec { start, end }, rest));
+        }
+        Ok((Spec { start, end: None }, rest))
+    }
+
+    /// True if no address was given at all. Used by commands like
+    /// `w` to detect the "no spec, no buffer either" case where
+    /// resolving would error but the command should still succeed
+    /// (writing a 0-byte file from an empty buffer).
+    pub fn is_empty(&self) -> bool {
+        self.start.is_none() && self.end.is_none()
+    }
+
+    /// Resolve with current-line as the default for an omitted
+    /// spec. Used by `p`, `n`, and most other commands.
+    pub fn resolve(&self, buf: &Buffer) -> Result<Range, String> {
+        self.resolve_with(buf, (Address::Current, Address::Current))
+    }
+
+    /// Resolve with the whole buffer (`1,$`) as the default for an
+    /// omitted spec. Used by `w` — typing `w foo.txt` with no
+    /// address writes the entire buffer, not just the current line.
+    /// The line `a` appends after and `i` inserts before: the last
+    /// address given, or the current line. 0 is allowed, meaning before
+    /// the first line, and so is an empty buffer, whose current line is 0.
+    pub fn resolve_target(&self, buf: &Buffer) -> Result<usize, String> {
+        let (first, last) = match (&self.start, &self.end) {
+            (None, None) => return Ok(buf.current()),
+            (Some(s), None) => (s, s),
+            (Some(s), Some(e)) => (s, e),
+            (None, Some(_)) => unreachable!("parser never produces (None, Some)"),
+        };
+        let (first, last) = (resolve_one(first, buf)?, resolve_one(last, buf)?);
+        if first > buf.len() || last > buf.len() {
+            return Err("invalid address".to_string());
+        }
+        Ok(last)
+    }
+
+    pub fn resolve_or_whole(&self, buf: &Buffer) -> Result<Range, String> {
+        self.resolve_with(buf, (Address::Number(1), Address::Last))
+    }
+
+    /// Resolve with `.,.+1` as the default for an omitted spec.
+    /// Used by `j` (join) — bare `j` joins the current line with
+    /// the next one, matching ed.
+    pub fn resolve_or_pair_with_next(&self, buf: &Buffer) -> Result<Range, String> {
+        self.resolve_with(buf, (Address::Current, Address::Offset(1)))
+    }
+
+    fn resolve_with(&self, buf: &Buffer, default: (Address, Address)) -> Result<Range, String> {
+        if buf.is_empty() {
+            return Err("invalid address".to_string());
+        }
+
+        let (start_addr, end_addr) = match (&self.start, &self.end) {
+            (None, None) => default,
+            (Some(s), None) => (clone_addr(s), clone_addr(s)),
+            (Some(s), Some(e)) => (clone_addr(s), clone_addr(e)),
+            (None, Some(_)) => unreachable!("parser never produces (None, Some)"),
+        };
+
+        let start = resolve_one(&start_addr, buf)?;
+        let end = resolve_one(&end_addr, buf)?;
+
+        if start == 0 || end == 0 || start > buf.len() || end > buf.len() {
+            return Err("invalid address".to_string());
+        }
+        if start > end {
+            return Err("invalid address".to_string());
+        }
+        Ok(Range { start, end })
+    }
+}
+
+/// Parse and resolve a single address used as the destination of a
+/// move (`m`) or transfer (`t`) command. Allows 0 ("before line 1")
+/// because `m`/`t` write *after* the destination — dest 0 means
+/// "place at the top of the buffer". Returns the resolved line
+/// number and the remaining input after the address.
+pub fn parse_dest<'a>(input: &'a str, buf: &Buffer) -> Result<(usize, &'a str), String> {
+    let input = input.trim_start();
+    let (spec, rest) = Spec::parse(input)?;
+    if spec.end.is_some() {
+        return Err("destination must be a single address".to_string());
+    }
+    let addr = spec.start.ok_or_else(|| "no destination".to_string())?;
+    let n = resolve_one(&addr, buf)?;
+    if n > buf.len() {
+        return Err("invalid address".to_string());
+    }
+    Ok((n, rest))
+}
+
+/// Parse a single address atom. Returns `(maybe_address, rest)`.
+/// `Ok((None, rest))` means "no address here, the rest is the
+/// command letter" — used by callers that need to distinguish an
+/// empty address from a parse error.
+fn parse_one(input: &str) -> Result<(Option<Address>, &str), String> {
+    let bytes = input.as_bytes();
+    let Some(&first) = bytes.first() else {
+        return Ok((None, input));
+    };
+    match first {
+        b'.' => Ok((Some(Address::Current), &input[1..])),
+        b'$' => Ok((Some(Address::Last), &input[1..])),
+        b'+' | b'-' => {
+            let sign: isize = if first == b'+' { 1 } else { -1 };
+            let (digits, rest) = take_digits(&input[1..]);
+            // `+` alone (no digits) means `+1`, ditto `-`.
+            let n: isize = if digits.is_empty() {
+                1
+            } else {
+                digits
+                    .parse::<isize>()
+                    .map_err(|_| "invalid address".to_string())?
+            };
+            Ok((Some(Address::Offset(sign * n)), rest))
+        }
+        b'0'..=b'9' => {
+            let (digits, rest) = take_digits(input);
+            let n: usize = digits
+                .parse::<usize>()
+                .map_err(|_| "invalid address".to_string())?;
+            Ok((Some(Address::Number(n)), rest))
+        }
+        b'/' | b'?' => {
+            let forward = first == b'/';
+            let (pattern, rest) = scan_search_pattern(&input[1..], first);
+            Ok((Some(Address::Search { pattern, forward }), rest))
+        }
+        _ => Ok((None, input)),
+    }
+}
+
+/// Scan a `delim`-terminated search pattern starting right after the
+/// opening delimiter. An escaped delimiter becomes a literal
+/// delimiter, which is safe because the only search delimiters, `/`
+/// and `?`, mean nothing to a BRE; other escapes pass through
+/// unchanged for the regex engine to interpret.
+///
+/// The closing delimiter may be omitted if the pattern runs to the
+/// end of the line (`/foo` with no trailing `/`), matching ed: the
+/// whole remainder becomes the pattern and there is no command
+/// letter left to parse, so the caller falls back to its bare-address
+/// "print" default.
+fn scan_search_pattern(input: &str, delim: u8) -> (Vec<u8>, &str) {
+    let bytes = input.as_bytes();
+    let mut result = Vec::new();
+    let mut i = 0;
+    while i < bytes.len() {
+        if bytes[i] == delim {
+            return (result, &input[i + 1..]);
+        }
+        if bytes[i] == b'\\' && i + 1 < bytes.len() {
+            if bytes[i + 1] == delim {
+                result.push(delim);
+            } else {
+                result.push(bytes[i]);
+                result.push(bytes[i + 1]);
+            }
+            i += 2;
+        } else {
+            result.push(bytes[i]);
+            i += 1;
+        }
+    }
+    (result, "")
+}
+
+/// Pull a run of ASCII digits off the front of `s`. Returns the
+/// digit slice and the remainder.
+fn take_digits(s: &str) -> (&str, &str) {
+    let end = s
+        .as_bytes()
+        .iter()
+        .position(|b| !b.is_ascii_digit())
+        .unwrap_or(s.len());
+    s.split_at(end)
+}
+
+fn resolve_one(addr: &Address, buf: &Buffer) -> Result<usize, String> {
+    match addr {
+        Address::Number(n) => Ok(*n),
+        Address::Current => Ok(buf.current()),
+        Address::Last => Ok(buf.len()),
+        Address::Offset(n) => {
+            let base = buf.current() as isize;
+            let result = base + n;
+            if result < 1 {
+                Err("invalid address".to_string())
+            } else {
+                Ok(result as usize)
+            }
+        }
+        Address::Search { pattern, forward } => search(pattern, *forward, buf),
+    }
+}
+
+/// Scan for the next line matching `pattern`, starting just past the
+/// current line and wrapping at the buffer ends. Matches ed: on an
+/// empty buffer, or if no line (including the current one, checked
+/// last on wraparound) matches, this errors.
+fn search(pattern: &[u8], forward: bool, buf: &Buffer) -> Result<usize, String> {
+    if buf.is_empty() {
+        return Err("invalid address".to_string());
+    }
+    let re = bre::Regex::compile(pattern);
+    let len = buf.len();
+    let mut n = buf.current();
+    for _ in 0..len {
+        n = if forward {
+            if n >= len { 1 } else { n + 1 }
+        } else if n <= 1 {
+            len
+        } else {
+            n - 1
+        };
+        if let Some(line) = buf.line(n)
+            && re.find(line.as_bytes()).is_some()
+        {
+            return Ok(n);
+        }
+    }
+    Err("no match".to_string())
+}
+
+fn clone_addr(a: &Address) -> Address {
+    match a {
+        Address::Number(n) => Address::Number(*n),
+        Address::Current => Address::Current,
+        Address::Last => Address::Last,
+        Address::Offset(n) => Address::Offset(*n),
+        Address::Search { pattern, forward } => Address::Search {
+            pattern: pattern.clone(),
+            forward: *forward,
+        },
+    }
+}

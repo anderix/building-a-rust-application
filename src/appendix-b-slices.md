@@ -54,8 +54,9 @@ The slices ended at 0.1.0. Everything after was added in response to use:
 | 0.2.0 | Encoding warnings, the overwrite refusal | 13 |
 | 0.2.1 | The command-letter panic, the tenth-group panic | 5, 9 |
 | 0.3.0 | Search addresses, character-aware matching | 19 |
+| 0.4.0 | The fixes for this book's findings; `-s`, `%`, `write`, `edit`, `read` | 20, 21, 22 |
 
-`examples/ved` is 0.2.1. `examples/ch19-living` is 0.3.0.
+`examples/ved` is 0.2.1, `examples/ch19-living` is 0.3.0, and `examples/ch21-fixed` is 0.4.0.
 
 ## B.3 The crates
 
@@ -73,6 +74,7 @@ The slices ended at 0.1.0. Everything after was added in response to use:
 | `ch13-files` | 2,006 | 76 | Files, aliases, help, `Q` |
 | `ved` | 2,871 | 125 | Release 0.2.1 |
 | `ch19-living` | 3,625 | 185 | Release 0.3.0 |
+| `ch21-fixed` | 4,367 | 225 | Release 0.4.0 |
 
 Every crate builds and runs on its own, with `cargo run -p <crate>` from
 `examples/`, and `cargo test` there runs all of them.
