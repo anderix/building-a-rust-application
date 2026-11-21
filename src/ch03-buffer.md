@@ -310,9 +310,9 @@ enum Action {
 `Error` is the split chapter 2 promised. Slice 1 wrote
 `format!("? unknown command: {other}")`, with the marker baked into the text.
 Now `dispatch` returns the message and the loop writes the `?`. One place in
-the program decides what an error looks like, which is what makes slice 9's
-rewrite of every error message a contained piece of work rather than a sweep.
-Chapter 14 is about the rewriting.
+the program decides what an error looks like, which is what would make the
+rewrite of every error message that the plan scheduled for slice 9 a contained
+piece of work rather than a sweep. Chapter 14 is about what became of it.
 
 `Continue` is gone because the empty line stopped being a command that does
 nothing. In ed, bare Enter is shorthand for `+1p`: advance to the next line and

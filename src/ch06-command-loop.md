@@ -81,8 +81,8 @@ of them is a command, and commands are `dispatch`'s business.
 
 A loop that had printed its own output would have grown differently. Each new
 command would have added a call to `writeln!`, the error format would live in
-fourteen places, and the decision in chapter 14 to rewrite every message in the
-program would have been a search rather than an edit.
+fourteen places, and the rewrite of every message that the plan scheduled for
+slice 9 would have been a search rather than an edit.
 
 ## 6.3 One function per command
 

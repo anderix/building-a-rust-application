@@ -267,8 +267,8 @@ Three things about this enum are worth noticing now. `Action::Print(String)`
 carries an owned `String` rather than a `&str`, because the message is usually
 constructed rather than borrowed from the input. There is no `Action::Error`
 yet, so slice 1 formats the `?` prefix into the message by hand; the next slice
-splits the prefix out into its own variant, and slice 9 rewrites the text that
-goes inside it, which is what Chapter 14 is about. And `Continue` exists so that a bare
+splits the prefix out into its own variant, and the plan gave slice 9 the job of
+rewriting the text that goes inside it, which Chapter 14 comes back to. And `Continue` exists so that a bare
 Enter is a command that does nothing, rather than a command that fails.
 
 ## 2.5 What slice one is for

@@ -393,8 +393,8 @@ The `Error` arm is the interesting one. It formats `? {msg}` itself, which is
 the only place outside `run_repl` that knows what an error looks like. Chapter 2
 moved the `?` prefix into the loop so that one place would decide the format,
 and this arm is a second place, written because `Action` has no way to carry a
-mixture of output and errors. When chapter 14 changes what errors look like,
-this is the line that does not change with them.
+mixture of output and errors. If the format of errors ever changes, this is
+the line that will not change with them.
 
 A `g` that matches nothing is `? no match`. ed says nothing, on the reasoning
 that "for every matching line" over zero lines is a command that did nothing

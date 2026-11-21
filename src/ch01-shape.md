@@ -20,7 +20,8 @@ non-interactive descendant, and `vi` was built on top of it.
 ved keeps ed's interface and replaces its silence. Where ed prints nothing, ved
 prints `deleted 3 lines (2-4)`. Where ed prints `?`, ved prints `? no match`.
 Where ed has no help, ved has an `H` command that prints the command reference
-without leaving the editor. Scripts written for ed run against ved unchanged.
+without leaving the editor. The aim is that scripts written for ed run against
+ved unchanged, and chapter 14 measures how close it came.
 
 The useful property here is not the idea. It is that somebody else wrote the
 specification. POSIX defines what `ed` does, GNU ed is sitting on the machine to
