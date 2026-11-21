@@ -283,10 +283,10 @@ and `g/./t.`, this version produced the same buffer as ed in all sixteen. The
 
 `take_mark` scans from the start each time, so a `g` over *n* lines with *m*
 marks is O(*n* × *m*) in the worst case. The Seventh Edition loop has the same
-shape, and for a buffer of a hundred thousand lines it is still faster than printing the
-result. A program that needed better would keep the scan position and restart
-from it, which is correct only if commands never move a marked line upward,
-and `m0` does.
+shape, and for a buffer of a hundred thousand lines it is still faster than
+printing the result. A program that needed better would keep the scan position
+and restart from it, which is correct only if commands never move a marked line
+upward, and `m0` does.
 
 One difference from ed remains. `m` and `t` are built from `delete_range` and
 `append_after`, so a moved line is a new line and arrives unmarked. In ed a
@@ -407,8 +407,8 @@ printed. Which of those is right is the question of chapter 14.
 The ancestor of `grep`, built on top of everything already there: the scanner
 from `s`, the address default from chapter 4, the engine from chapters 7
 through 9, and the dispatcher from chapter 2, called recursively. `run_global`
-is eighty-four lines, and nearly all of them are about running other commands rather
-than about matching.
+is eighty-four lines, and nearly all of them are about running other commands
+rather than about matching.
 
 The representation chosen for the marks was the first one that came to mind,
 it was right for the commands the slice was tested with, and the special case

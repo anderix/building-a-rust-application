@@ -223,9 +223,9 @@ README, and it stays correct until the world changes.
 
 "Switched from byte comparison to modification time in May, after the hash
 proved unreliable" is a statement about a change. The moment a third approach
-arrives, that sentence is describing a dead decision in the present tense, sitting
-in a file where a reader — or a future you at two in the morning — will load it
-as current guidance.
+arrives, that sentence is describing a dead decision in the present tense,
+sitting in a file where a reader — or a future you at two in the morning — will
+load it as current guidance.
 
 The test is tense, not topic. Naming a former state, an alternative that was
 rejected, or the date a decision was taken is the tell. Those sentences go in

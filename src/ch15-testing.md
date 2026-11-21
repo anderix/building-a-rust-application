@@ -8,10 +8,10 @@ fails on any of them.
 
 That is not an argument that the tests are bad. Most of them are the right
 tests, of the right shape, and they are why the program could be changed
-without fear from its first release to 0.2.1. It is an argument that a passing suite is a
-statement about the questions the suite asks, and this chapter is about which
-questions ved's suite asks, which it does not, and three cheap ways to ask the
-rest.
+without fear from its first release to 0.2.1. It is an argument that a passing
+suite is a statement about the questions the suite asks, and this chapter is
+about which questions ved's suite asks, which it does not, and three cheap ways
+to ask the rest.
 
 ## 15.1 What there is
 
@@ -171,12 +171,12 @@ the test was wrong in the same way, and the two agreed. A test like that is not
 useless, since it still catches the code changing by accident, but it cannot
 catch the code being wrong, because it has no independent source of truth.
 
-The repair is about where the expected value comes from. `list_tab_becomes_octal`
-should have been written by reading the POSIX description of `l`, or by running
-`printf 'a\tb\n' | ed -s` with an `l` command, and copying what came out. Then
-the test disagrees with the code on the day it is written, and the
-disagreement is the finding. A test that can never disagree with the code it
-tests is documentation.
+The repair is about where the expected value comes from.
+`list_tab_becomes_octal` should have been written by reading the POSIX
+description of `l`, or by running `printf 'a\tb\n' | ed -s` with an `l`
+command, and copying what came out. Then the test disagrees with the code on
+the day it is written, and the disagreement is the finding. A test that can
+never disagree with the code it tests is documentation.
 
 Chapter 14 asked how to write tests that can disagree. That is the answer: the
 expected value comes from somewhere the code did not.
@@ -197,12 +197,12 @@ Chapter 1 chose ed partly because a specification existed. The most useful
 form of that specification is not POSIX's text. It is `/usr/bin/ed`, which is
 installed on the machine and answers any question in a millisecond.
 
-Most of the bugs in chapters 10 through 14 were found that way, by hand: type
-a command into both editors and compare. Automating it takes about forty lines. The
-harness used here generates random scripts from a small grammar of addresses
-and commands, runs each through ved and through GNU ed on the same six-line
-file, ends each script with `w out.txt` and `Q`, and compares the files the two
-editors wrote:
+Most of the bugs in chapters 10 through 14 were found that way, by hand: type a
+command into both editors and compare. Automating it takes about forty lines.
+The harness used here generates random scripts from a small grammar of
+addresses and commands, runs each through ved and through GNU ed on the same
+six-line file, ends each script with `w out.txt` and `Q`, and compares the
+files the two editors wrote:
 
 ```text
 CMDS = ["p", "n", "d", "j", "m{a}", "t{a}", "s/a/X/", "s/a/X/g", "s/^a/X/g",
@@ -397,9 +397,9 @@ learned.
 ## 15.9 What the suite bought
 
 A program that could be changed from release to release without breaking what
-it already did, which is what a regression suite is for. 125 tests in hundredths of a
-second, almost all of them through the `dispatch` boundary that chapter 2 made
-for this purpose.
+it already did, which is what a regression suite is for. 125 tests in
+hundredths of a second, almost all of them through the `dispatch` boundary that
+chapter 2 made for this purpose.
 
 It did not buy correctness against ed, because nothing in it consulted ed. The
 three additions in this chapter cost a script of about forty lines, a test of

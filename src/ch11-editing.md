@@ -373,9 +373,9 @@ p
 two
 ```
 
-ed prints nothing. The fix is `return Action::Done`, which is the variant section
-11.1 introduced for this purpose, and which was already in the enum when `j`
-was written.
+ed prints nothing. The fix is `return Action::Done`, which is the variant
+section 11.1 introduced for this purpose, and which was already in the enum
+when `j` was written.
 
 The bug is small and the way it survived is not. The test checks the value
 `dispatch` returns, which is the decision from chapter 2 that makes the whole
@@ -485,11 +485,12 @@ Six commands in this chapter, and `buffer.rs` gained one method for them:
 | `m` | `delete_range`, `append_after` |
 | `t` | `append_after` |
 
-Every change to the buffer's lines in the finished program, including `s`,
-`g`, and `r`, goes through `append_after`, `delete_range`, or `replace_line`,
-and `e` starts a new buffer and fills it with `append_after`. That is a narrow interface, and it is the reason chapter 3's
-invariant about `current` was still holding at 2,800 lines: three methods
-maintain it, and nothing else can reach the fields.
+Every change to the buffer's lines in the finished program, including `s`, `g`,
+and `r`, goes through `append_after`, `delete_range`, or `replace_line`, and
+`e` starts a new buffer and fills it with `append_after`. That is a narrow
+interface, and it is the reason chapter 3's invariant about `current` was still
+holding at 2,800 lines: three methods maintain it, and nothing else can reach
+the fields.
 
 It is also the precondition for the feature ved most conspicuously lacks:
 

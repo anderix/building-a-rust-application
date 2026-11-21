@@ -507,12 +507,12 @@ repairing a broken invariant to asserting a kept one.
     }
 ```
 
-It can panic on a bad address, and its doc comment says so. That is a weaker contract than chapter 3's `line`, which
-returns `None`, and the reason it is acceptable is that the only caller passes
-an `n` it has just read with `buf.line(n)`. The invariant is real and it is
-held by the call site, which is the arrangement chapter 4's `unreachable!` was
-criticized for. The difference is one of distance: here the check and the
-reliance on it are four lines apart.
+It can panic on a bad address, and its doc comment says so. That is a weaker
+contract than chapter 3's `line`, which returns `None`, and the reason it is
+acceptable is that the only caller passes an `n` it has just read with
+`buf.line(n)`. The invariant is real and it is held by the call site, which is
+the arrangement chapter 4's `unreachable!` was criticized for. The difference
+is one of distance: here the check and the reliance on it are four lines apart.
 
 ## 10.6 What it says afterwards
 
@@ -622,10 +622,10 @@ first one where ved does the job people use ed for.
 It also has the program's densest cluster of disagreements with ed, and they
 share a cause. The scanner interpreted an escape it should have passed on. The
 `g` loop discarded the positions it needed. The flag parser accepted characters
-it did not understand. In each case a component answered a question that belonged to
-somebody else, or declined to ask a question that was its own, and the result
-was a plausible line of output. None of it was visible to tests that checked
-the cases their author had in mind, which is chapter 15's subject.
+it did not understand. In each case a component answered a question that
+belonged to somebody else, or declined to ask a question that was its own, and
+the result was a plausible line of output. None of it was visible to tests that
+checked the cases their author had in mind, which is chapter 15's subject.
 
 ---
 

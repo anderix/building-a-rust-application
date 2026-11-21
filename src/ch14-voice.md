@@ -32,9 +32,9 @@ because chapter 5 had made the decision, at slice four, that every command
 would say what it did in a sentence, and every command after it was written
 that way.
 
-So slice nine shrank to two items. `d` gained its confirmation, `deleted 3 lines
-(2-4)`, replacing the silence that slice six had copied from ed. And `Q` arrived,
-which quits without the unsaved-buffer warning and is one match arm:
+So slice nine shrank to two items. `d` gained its confirmation, `deleted 3
+lines (2-4)`, replacing the silence that slice six had copied from ed. And `Q`
+arrived, which quits without the unsaved-buffer warning and is one match arm:
 
 ```rust,ignore
         "Q" => return Action::ForceQuit,
@@ -120,9 +120,9 @@ the source, and it is the answer to all of these:
 
 Four different mistakes, one message. The first is a line past the end, the
 second is the line that does not exist, the third is a backwards range, and the
-fourth is an offset past the end. The code that rejects them, in
-`resolve_with` and `resolve_one`, knows which case it is in, because each is a
-separate condition, and it knows the buffer's length. `line 1000 is past the end (the
+fourth is an offset past the end. The code that rejects them, in `resolve_with`
+and `resolve_one`, knows which case it is in, because each is a separate
+condition, and it knows the buffer's length. `line 1000 is past the end (the
 buffer has 3 lines)` costs one `format!` per case and is what a user who typed
 `1000p` by mistake needs to see. It is ed's `?` with the word "address" added.
 
@@ -342,12 +342,12 @@ different kind, cheaply:
 
 The list in the test is a third copy of the command set, which is the obvious
 objection to it, and it is still better than two copies that drift silently,
-because when it drifts it fails. The real fix is the one chapter 6 decided against: a
-table of commands that both the dispatcher and the help are generated from.
-Chapter 6 named the condition under which a table wins, something other than
-the dispatcher needing to enumerate the commands, and noted that the help is
-such a thing. Three copies of a list, and four mistakes in the one nobody
-tests, are what leaving the table unbuilt cost.
+because when it drifts it fails. The real fix is the one chapter 6 decided
+against: a table of commands that both the dispatcher and the help are
+generated from. Chapter 6 named the condition under which a table wins,
+something other than the dispatcher needing to enumerate the commands, and
+noted that the help is such a thing. Three copies of a list, and four mistakes
+in the one nobody tests, are what leaving the table unbuilt cost.
 
 `H` itself is a compatibility decision. In ed, `H` toggles help mode, in which
 every `?` is followed by an explanation, which is the closest ed comes to ved's
@@ -393,13 +393,13 @@ Errors that say what went wrong, a help command, long names for the commands
 that can have them, `l`, and a confirmation for most commands that change the
 buffer. For the person at the keyboard, ved does what chapter 1 said it would.
 
-For a script, it is louder than ed and reports success after a failure, and the gap
-between the two readers is one flag and one `Action` variant wide. The
+For a script, it is louder than ed and reports success after a failure, and the
+gap between the two readers is one flag and one `Action` variant wide. The
 inventory in section 14.2 found three styles of confirmation, the help was
 missing three commands, and the plan's three remaining aliases did something
 other than what their names said. None of that was decided. It accumulated in
-the places where each command spoke for itself, and the parts of the voice
-that were consistent were the parts that went through one function.
+the places where each command spoke for itself, and the parts of the voice that
+were consistent were the parts that went through one function.
 
 ---
 
