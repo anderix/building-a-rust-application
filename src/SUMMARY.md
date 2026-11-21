@@ -12,7 +12,7 @@
 - [A Regex Engine: Compiling the Pattern](ch08-compiling.md)
 - [A Regex Engine: Groups and Backreferences](ch09-groups.md)
 - [Substitute](ch10-substitute.md)
-- [Commands That Move Lines]()
+- [Commands That Move Lines](ch11-editing.md)
 - [The Global Command]()
 - [Files, and the Outside World]()
 - [The Voice of the Program]()
