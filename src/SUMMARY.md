@@ -22,6 +22,8 @@
 - [Packaging](ch18-packaging.md)
 - [Living With It](ch19-living.md)
 - [Bugs](ch20-bugs.md)
+- [Fixing Them](ch21-fixing.md)
+- [Shipping the Fixes](ch22-shipping.md)
 
 ---
 

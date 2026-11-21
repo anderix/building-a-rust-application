@@ -90,7 +90,7 @@ misread. None of these bugs was introduced by a careless change to working
 code. Each was there from the day its feature was written, and each survived
 because nothing after that day looked at the feature again. The slice plan
 from chapter 1 built a feature, tested the cases its author had in mind, and
-moved on, which is the right way to build a program and leaves exactly these
+moved on, which is the right way to build a program and leaves these
 behind. A program's bugs are mostly the ones it was born with.
 
 ## 20.3 What caused them
@@ -162,7 +162,7 @@ plausible with it, which is worse than failing, because it looks like working.
 
 **The wrong order.** `e` emptied the buffer and then loaded the file into it.
 When the load failed, there was nothing left to go back to (#17). The repair
-is a rule worth having in general: build the new state somewhere else, and
+is a general rule: build the new state somewhere else, and
 replace the old one only when the new one is complete. Chapter 5 said it about
 writing files; it holds for anything that replaces something.
 
@@ -207,8 +207,8 @@ not in the table either, for a different reason: by 0.3.0 the panics had been
 fixed, and a million runs found none. It found a new one in chapter 21, which
 is the reason to keep running it.
 
-Writing the book was the most productive method, and it is worth being exact
-about why. Explaining a function requires reading every line of it with a
+Writing the book was the most productive method, for a specific reason.
+Explaining a function requires reading every line of it with a
 question in mind: what does this do with an input its author did not think
 of? That is a code review. A book is a code review that cannot skip the dull
 parts, because a chapter has to cover the whole command. You do not need to
