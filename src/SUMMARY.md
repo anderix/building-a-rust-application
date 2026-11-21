@@ -13,7 +13,7 @@
 - [A Regex Engine: Groups and Backreferences](ch09-groups.md)
 - [Substitute](ch10-substitute.md)
 - [Commands That Move Lines](ch11-editing.md)
-- [The Global Command]()
+- [The Global Command](ch12-global.md)
 - [Files, and the Outside World]()
 - [The Voice of the Program]()
 - [Testing]()

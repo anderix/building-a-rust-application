@@ -45,9 +45,9 @@ crate and move on".
 
 ## What is written so far
 
-Chapters 1 to 11 are here: from an empty directory to a working editor with
-addresses, a command loop, its own regular expression engine, and the commands
-that change text and move lines. Chapters 12 to 19 and the appendices are still
+Chapters 1 to 12 are here: from an empty directory to a working editor with
+addresses, a command loop, its own regular expression engine, the commands
+that change text and move lines, and the global command. Chapters 13 to 19 and the appendices are still
 being written, and they show in the contents without links until they are
 done. Where a chapter here refers ahead to one of
 them, it is describing a chapter still to come.
