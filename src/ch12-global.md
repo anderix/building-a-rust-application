@@ -184,6 +184,7 @@ is line 5, in a buffer that now has four lines. `set_current(5)` does not check
 its argument, `-1` resolves to 4, and line 4 is `a5`: a line that matched the
 pattern, that the user was not deleting, and that is now gone, with a
 confirmation reporting the deletion of a line number rather than of a line.
+Filed as [ved #19](https://github.com/excelano/ved/issues/19).
 
 GNU ed, given the same command, stops at the first error and changes nothing.
 

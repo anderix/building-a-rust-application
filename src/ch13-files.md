@@ -170,7 +170,7 @@ CRLF to LF, and the user's only edit was to save. `run_write` joins lines with
 `\n`, as it should, and the information that they were ever joined with
 anything else was discarded by `lines()` before the first command ran. GNU ed
 writes back ten bytes, because to ed the `\r` is the last character of the
-line.
+line. Filed as [ved #18](https://github.com/excelano/ved/issues/18).
 
 ved ships through WinGet, so this is not a hypothetical. A user on Windows
 opening a file their editor saved with CRLF endings, fixing one typo with ved,
@@ -279,7 +279,8 @@ contents of other.txt
 
 GNU ed answers the `e` with `? Warning: buffer modified` and does nothing until
 it is typed a second time, which is the same double-command dance as `q`. ved
-discards the work without a word.
+discards the work without a word. Filed, with the failed load below, as
+[ved #17](https://github.com/excelano/ved/issues/17).
 
 The ordering makes the second case worse. `*buf = Buffer::new()` happens before
 `load_file`, so if the load fails, the buffer is already gone and there is
@@ -434,7 +435,8 @@ w
 ```
 
 That file is plain UTF-8 that happens to contain the marker, as a sentence
-about UTF-7 would. It cannot be saved in place.
+about UTF-7 would. It cannot be saved in place. Filed as [ved
+#25](https://github.com/excelano/ved/issues/25).
 
 Follow the two detections through `load_file` and the refusal turns out to
 protect only this case. A UTF-16 file fails `read_to_string` and never reaches

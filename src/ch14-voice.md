@@ -192,7 +192,9 @@ other reader, and ed's compatibility with scripts lives almost entirely in how
 it treats that reader: silence on request, and a status that reports failure.
 The ved README describes its compatibility as close enough that *most* scripts
 written for ed run unchanged, which is accurate, and the scripts that do not
-are mostly the ones that use `-s`.
+are mostly the ones that use `-s`. The flag and the exit status are filed as
+[ved #27](https://github.com/excelano/ved/issues/27) and [ved
+#26](https://github.com/excelano/ved/issues/26).
 
 Chapter 12 left a question here, about whether `g/TODO/d` over a file with no
 matches should print `? no match`, as ved does, or nothing, as ed does. The
@@ -276,7 +278,7 @@ dit: new file
 `dit` and, because of chapter 13's `e`, discarded the buffer to do it. Neither
 said anything that looked wrong. A user who read the plan, or guessed the name
 from `append` and `delete`, gets a file with a strange name, or loses their
-work.
+work. Filed as [ved #15](https://github.com/excelano/ved/issues/15).
 
 The same mechanism reaches the most common command in ed scripts. `wq`, write
 and quit, is how a great many of them end:
@@ -289,10 +291,11 @@ wrote 4 bytes to q
 ```
 
 ved read `wq` as `w` with the filename `q`. It wrote the edited buffer to a new
-file named `q`, left `f.txt` unchanged, did not quit, and exited 0 when its input
-ran out. A script that ends in `wq` runs to completion under ved, reports
+file named `q`, left `f.txt` unchanged, did not quit, and exited 0 when its
+input ran out. A script that ends in `wq` runs to completion under ved, reports
 success, and does not change the file it was written to change. GNU ed writes
-`f.txt` and quits.
+`f.txt` and quits. Filed as [ved
+#14](https://github.com/excelano/ved/issues/14).
 
 The cause is in the second stage of the dispatcher, which takes the first
 character of the command as the letter and everything after it as the argument,
@@ -338,7 +341,7 @@ disagree with each other as well as with the code. `g` and `v` are shown as
 `[.,.]g/re/cmd`, which says the default address is the current line; it is the
 whole buffer, `1,$`, which is the most important fact about `g`. And `w` is
 shown as `[.,.]w`, with the text *default: all*, which contradicts its own
-brackets.
+brackets. Filed as [ved #29](https://github.com/excelano/ved/issues/29).
 
 None of this can be caught by a test of the kind the program has, since the
 help is a string and the tests check behavior. It can be caught by a test of a

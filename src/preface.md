@@ -55,6 +55,22 @@ slice list in the repository's `PLAN.md` was written before the code.
 Each chapter here takes a slice or two and builds it. The code is the real
 code.
 
+## What the book found
+
+Writing about a program means reading every line of it and checking every
+claim against the program and against ed, and that is a code review. It found
+bugs. The regex chapters found two crashes and a character-corrupting
+substitution, chapter 4 found a feature the code had promised since slice
+three, and the chapters after them found eighteen more, from a script ending
+in `wq` that saves nothing to a tutorial that teaches a command ved does not
+have.
+
+They are part of the story, because finding what is wrong with a program you
+have shipped is part of building one. Each is told in the chapter that found
+it, at the point where it was found, with a link to the issue in ved's tracker.
+Some were fixed before the book was finished, and the chapters say so. The rest
+were open when it was finished, and chapter 19 is about where they went.
+
 ## Running the code
 
 The program at twelve points in its history lives under `examples/` in the

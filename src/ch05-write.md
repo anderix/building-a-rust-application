@@ -72,7 +72,9 @@ and takes the buffer with it.
 
 That panic was in ved from this slice until the chapter you are reading was
 written, which is the reason it is here rather than in a list of things to
-watch for.
+watch for. It went into the tracker that day as [ved
+#8](https://github.com/excelano/ved/issues/8), and the fix shipped the next day
+in 0.2.1.
 
 Chapter 3 argued that a panic in a text editor loses the buffer, as the reason
 `Buffer::line` returns an `Option` instead of indexing. The argument was right,

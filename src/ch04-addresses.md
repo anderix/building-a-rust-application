@@ -359,7 +359,10 @@ $-1p
 
 GNU ed accepts both. The offsets that ved does have (`+3`, `-2`) always resolve
 against the current line, because `Address::Offset` holds a number and nothing
-to attach it to, so an offset cannot compose onto a preceding address.
+to attach it to, so an offset cannot compose onto a preceding address. Search
+addresses went into ved's tracker as [ved
+#7](https://github.com/excelano/ved/issues/7) on the day this chapter was
+written, and chapter 19 follows them into 0.3.0.
 
 Chapter 1 made a distinction between a repository documenting what is *true*
 and a decision log recording what *changed*, and this comment is the third

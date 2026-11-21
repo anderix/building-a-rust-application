@@ -113,9 +113,10 @@ $ echo $?
 The two errors are `if ... && let` chains, which the 2024 edition allows from
 Rust 1.88 onward. 0.2.0 builds on 1.87. So does the commit immediately before
 the one that added continuous integration. The commit that added it does not,
-and the next section explains why. Someone with Rust 1.85, 1.86, or 1.87 who ran
-`cargo install ved` after September got a compile error from code they had not
-written, with no indication that the fix was to upgrade.
+and the next section explains why. Someone with Rust 1.85, 1.86, or 1.87 who
+ran `cargo install ved` after September got a compile error from code they had
+not written, with no indication that the fix was to upgrade. Filed as [ved
+#28](https://github.com/excelano/ved/issues/28).
 
 Declaring it is one line:
 

@@ -162,7 +162,8 @@ place.
 
 ## 9.5 Nine slots, and the day there were ten
 
-The chapter you are reading found a bug while it was being written.
+The chapter you are reading found a bug while it was being written. It is
+[ved #9](https://github.com/excelano/ved/issues/9), fixed in 0.2.1.
 
 ```text
 $ ved
@@ -321,7 +322,9 @@ error was printed, and the buffer is no longer what the user had.
 
 A text editor that silently alters text it was not asked to alter has a
 problem, and this one is worse than a crash: a crash loses the buffer and the
-user knows. This loses one character and looks like it worked.
+user knows. This loses one character and looks like it worked. It became [ved
+#10](https://github.com/excelano/ved/issues/10), and chapter 19 tells how it
+was fixed.
 
 The README says, under "Limitations worth knowing", that "UTF-8 text with
 multi-byte characters works". That sentence is the part of this that a reader

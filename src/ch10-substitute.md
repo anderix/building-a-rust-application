@@ -78,7 +78,7 @@ Two things in that block are less careful than they look.
 `? unterminated replacement` in ved and a working substitution in ed, where the
 final delimiter is optional and the line's end closes the replacement. It is
 the most common way to type `s` in practice, and it is a script that does not
-run unchanged.
+run unchanged. Filed as [ved #23](https://github.com/excelano/ved/issues/23).
 
 **The flags are a search, not a parse.** `rest.contains(&b'g')` asks whether a
 `g` appears anywhere in what is left. It does not ask what else is there:
@@ -96,7 +96,8 @@ the *n*th occurrence. ved accepts the garbage, ignores the count, and does
 something plausible with both. Chapter 8 called this a non-failing compiler
 when it happened to bracket expressions, and the cost is the same here: a typo
 becomes a different command rather than an error, and the user who typed `2`
-meant something by it.
+meant something by it. Filed as [ved
+#24](https://github.com/excelano/ved/issues/24).
 
 The general rule is the one from chapter 2's argument parser, applied one level
 down. Start strict. A suffix parser that rejects everything it does not know
@@ -171,7 +172,7 @@ field". The scanner turned it into `.`, which the engine reads as any
 character, and `axb` matched. GNU ed says `? No match`. The same thing happens
 to `s*x\*y*Z*`, which ved compiles as `x*y`, and to `\&` in a replacement
 delimited by `&`, which ved expands into the matched text instead of a literal
-ampersand.
+ampersand. Filed as [ved #21](https://github.com/excelano/ved/issues/21).
 
 The fix is to stop interpreting. The scanner's job is to find the end of a
 field, and it can do that without changing a byte:
@@ -374,7 +375,8 @@ XbXXcX
 match adjacent to the previous match is not a new match. Without it, the loop
 replaces `aaa` and then replaces the nothing that follows it. GNU ed sidesteps
 the question and refuses this substitution outright, with `? Infinite
-substitution loop`.
+substitution loop`. This and the anchor are filed together as [ved
+#22](https://github.com/excelano/ved/issues/22).
 
 All three have one cause. The loop throws away context every time it slices:
 the engine no longer knows where the line began, and the loop no longer knows

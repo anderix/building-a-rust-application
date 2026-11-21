@@ -198,11 +198,12 @@ heading
 4	three
 ```
 
-`0a` is how you put text at the top of a file in ed, and it is one of the
-first idioms anyone learns, because `1i` does the same thing and `0a` is one
+`0a` is how you put text at the top of a file in ed, and it is one of the first
+idioms anyone learns, because `1i` does the same thing and `0a` is one
 keystroke shorter to think about. In ved the text goes after the current line.
 It is in the right file, it is not lost, and it is in the wrong place, with no
-message saying so. This is still the behavior in 0.3.0.
+message saying so. This is still the behavior in 0.3.0, filed as [ved
+#20](https://github.com/excelano/ved/issues/20).
 
 Two decisions combined to produce it, and each was reasonable alone.
 `resolve_with` rejects 0, because for `p`, `d`, `s`, and nearly every other

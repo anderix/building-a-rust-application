@@ -131,7 +131,9 @@ The tutorial also teaches `edit filename`, which opens a file named `dit
 filename` and, because of chapter 13's `e`, discards the buffer first, and
 `read filename`, which reads from a file named `ead filename`. A reader who
 follows the tutorial carefully, in order, loses the work they typed in the
-earlier sections at the point where they were taught to save it.
+earlier sections at the point where they were taught to save it. It is filed as
+[ved #16](https://github.com/excelano/ved/issues/16), the most urgent issue
+this book produced.
 
 Further down, the same page says *the commands that already use
 delimiters — s/old/new/, g/pattern/cmd, v/pattern/cmd, w filename, e filename,

@@ -287,7 +287,7 @@ real ed run against ved unchanged*, in July. The WinGet manifests for 0.1.5, 0.2
 because the description was written into the manifest when the package was
 first submitted and has been carried forward with every version since. The correction reached the
 README, the crate description, and the Debian package. It did not reach the
-channel whose metadata lives in somebody else's repository.
+channel whose metadata lives in somebody else's repository. Filed as [ved #30](https://github.com/excelano/ved/issues/30).
 
 The same locale file's `ReleaseNotes` field is the body of the GitHub release,
 which chapter 17 found was install instructions, so `winget show Excelano.ved`

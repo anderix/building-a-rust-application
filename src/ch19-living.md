@@ -122,41 +122,58 @@ character rewrite fixed. Every other row in chapter 15's table is unchanged.
 
 ## 19.4 The list the book adds
 
-Chapters 10 through 18 were written after 0.3.0 shipped, so their findings
-have not been through the tracker. They are in the position chapter 9's were
-in on September 14: written down, not yet scheduled. Checked against 0.3.0, the
-ones that change what happens to a user's text:
+Chapters 10 through 18 were written after 0.3.0 shipped, and their findings
+reached the tracker the way chapter 9's did: all on one day, November 21,
+when the book was finished. Each issue carries a session that
+reproduces it against 0.3.0 and GNU ed's output for the same input, and each
+chapter links its finding at the point where it was found.
 
-| Finding | Chapter | In 0.3.0 |
+| Issue | Finding | Chapter |
 |---|---|---|
-| An escaped delimiter becomes a metacharacter: `s.a\..X.` | 10 | still there |
-| `^` matches again on each `g` repetition | 10 | still there |
-| An empty match next to a real one is replaced | 10 | still there |
-| `s/a/b` without a closing delimiter is an error | 10 | still there |
-| A count or unknown suffix after `s` is ignored | 10 | still there |
-| `s/$/!/g` adds a stray character | 10 | fixed |
-| `0a` and `5a` put text in the wrong place | 11 | still there |
-| `g` marks numbers, not lines, so `g/a/j` and `g/a/-1d` hit the wrong lines | 12 | still there |
-| CRLF line endings are rewritten as LF | 13 | still there |
-| `e` discards a modified buffer, and a failed `e` loses it | 13 | still there |
-| A UTF-8 file containing `+ACI-` cannot be saved in place | 13 | still there |
-| `write`, `edit`, and `read` act on files named `rite`, `dit`, `ead` | 14 | still there |
-| `wq` writes a file named `q` and does not quit | 14 | still there |
-| The tutorial teaches `write notes.txt` | 16 | still there |
+| [#14](https://github.com/excelano/ved/issues/14) | `wq` writes a file named `q` and does not quit | 14 |
+| [#15](https://github.com/excelano/ved/issues/15) | `write`, `edit`, and `read` act on files named `rite`, `dit`, `ead` | 14 |
+| [#16](https://github.com/excelano/ved/issues/16) | The tutorial teaches `write notes.txt` | 16 |
+| [#17](https://github.com/excelano/ved/issues/17) | `e` discards a modified buffer, and a failed `e` loses it | 13 |
+| [#18](https://github.com/excelano/ved/issues/18) | CRLF line endings are rewritten as LF | 13 |
+| [#19](https://github.com/excelano/ved/issues/19) | `g` marks numbers, not lines, so `g/a/j` and `g/a/-1d` hit the wrong lines | 12 |
+| [#20](https://github.com/excelano/ved/issues/20) | `0a` and `5a` put text in the wrong place | 11 |
+| [#21](https://github.com/excelano/ved/issues/21) | An escaped delimiter becomes a metacharacter: `s.a\..X.` | 10 |
+| [#22](https://github.com/excelano/ved/issues/22) | `^` matches again on each `g` repetition, and an empty match next to a real one is replaced | 10 |
+| [#23](https://github.com/excelano/ved/issues/23) | `s/a/b` without a closing delimiter is an error | 10 |
+| [#24](https://github.com/excelano/ved/issues/24) | A count or unknown suffix after `s` is ignored | 10 |
+| [#25](https://github.com/excelano/ved/issues/25) | A UTF-8 file containing `+ACI-` cannot be saved in place | 13 |
+| [#26](https://github.com/excelano/ved/issues/26) | Exit status 0 after an error | 14 |
+| [#27](https://github.com/excelano/ved/issues/27) | No `-s` flag, and confirmations on standard output | 14 |
+| [#28](https://github.com/excelano/ved/issues/28) | No declared minimum Rust version | 17 |
+| [#29](https://github.com/excelano/ved/issues/29) | The help omits `e`, `r`, and `Q`, and misstates three defaults | 14 |
+| [#30](https://github.com/excelano/ved/issues/30) | The WinGet manifest still says *drop-in* | 18 |
+| [#31](https://github.com/excelano/ved/issues/31) | Nothing tells a macOS user what happened to their channel | 19 |
 
-And the ones that change what a script sees: no `-s` flag, exit status 0 after
-an error, confirmations on standard output (chapter 14), and no declared
-minimum Rust version (chapter 17). Fixes for most of the rows in the first
-table, the escaped delimiter, the `g` loop, the append address, the marks,
-CRLF, and `e`, were built and tested in a scratch copy as each chapter was
-written. They are in those chapters, not in the program.
+The numbers are the order they were filed in, and the order is a rule: a
+change that loses a user's text without a message comes first, ranked by how
+many users reach it. `wq` ends a great many ed scripts. The tutorial is the
+first thing a new user reads, and following it writes a stray file and then
+throws away the buffer. After those, text that ends up wrong but present, then
+what scripts see, then the packaging and documentation that describe the
+program to people who have not installed it yet. Chapter 10's `s/$/!/g`, the
+one finding from these chapters that 0.3.0 had already fixed, is not on the
+list.
 
-The list is long, and its length is the measure of something specific. ved's
-first release was tested by its author against the cases its author thought of.
-Its first close reading by someone comparing it line by line against ed found
-the rest. That is the ordinary history of a program, and the part to copy is
-what happens next: the list goes into the tracker, one issue per row, and the
-rows that lose text go first.
+Fixes for most of the rows that change text, the escaped delimiter, the `g`
+loop, the append address, the marks, CRLF, and `e`, were built and tested in a
+scratch copy as each chapter was written. They are in those chapters, not in
+the program, and the issues point to them.
+
+Eighteen issues is the measure of something specific. ved's first release was
+tested by its author against the cases its author thought of. Its first close
+reading by someone comparing it line by line against ed found the rest. That is
+the ordinary history of a program, and it is the reason this book is built the
+way it is: a book about building software that is written against the real
+software, run against the real reference, is also a review of it, and a review
+whose findings stay in prose has not finished. Chapters 1 to 9 produced four
+issues and two releases. Chapters 10 to 19 produced these eighteen, and what
+happens to them is ved's next release, which this book does not contain. The
+tracker does.
 
 ## 19.5 The backlog
 
@@ -341,7 +358,8 @@ installed ved 0.2.1 with `brew install` keeps 0.2.1, and `brew upgrade` has no
 newer version to offer them and no way to say why. A macOS user who installed
 from the release archives finds no macOS archive for 0.3.0. Neither was told,
 because the channels have no way to reach their users except by delivering an
-update, and the update is what stopped.
+update, and the update is what stopped. Filed as [ved
+#31](https://github.com/excelano/ved/issues/31).
 
 That is the reason chapter 18 said to know how you would measure a channel
 before adding it, and the remedy for a project that did not is modest: when a
@@ -360,17 +378,18 @@ the same for every project its author maintains. And a set of channels that
 matches what the author can support.
 
 The book ends where a program's life continues. ved 0.3.0 is in use, and it has
-a list of findings that this book produced and its tracker has not yet seen,
-a backlog with a structure to copy and entries to recheck, and a constraint
-that has cost two features and paid for them. The work of a
-program after its first release is that loop: someone reads it closely, writes
-down what is wrong, and the list goes into the place where lists get done.
+eighteen open issues that this book produced, a backlog with a structure to
+copy and entries to recheck, and a constraint that has cost two features and
+paid for them. The work of a program after its first release is that loop:
+someone reads it closely, writes down what is wrong, and the list goes into the
+place where lists get done.
 
 ---
 
-**Exercise 19-1.** Turn the table in section 19.4 into issues, one per row,
-each with the session that reproduces it and the GNU ed output it should
-match. Then order them, and write down the rule you used.
+**Exercise 19-1.** Pick one of issues #14 to #31. Turn the session in the
+issue into a test against `examples/ch19-living`, watch it fail, and fix it.
+Then find the fix in ved's history, if it has shipped, and compare the two:
+what the shipped fix did that yours did not, and the other way round.
 
 **Exercise 19-2.** Rewrite ved's backlog for 0.3.0: delete what shipped, add
 what chapters 8 through 18 found, and check the stated reason on every item
