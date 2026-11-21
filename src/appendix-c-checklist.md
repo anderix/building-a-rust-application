@@ -93,3 +93,8 @@ ved took them, adjusted where ved's order turned out to be wrong.
 | Put each finding in the tracker the day it is made | Findings that get fixed | 19 |
 | Stop data loss with a small fix first, then fix the design | A safe place to make the large change | 19 |
 | Delete backlog items when they ship, and recheck the reasons on the rest | A backlog that describes what is left | 19 |
+| Decide which reference wins when the specification, the original, and the implementation on your machine disagree | Bug reports nobody argues with | 20 |
+| Fix one issue per commit, test first, with the expected value from the reference | A history that reads as the list of fixes | 21 |
+| Run the harness and the fuzzer after the last fix, not the first | The bugs the fixes made | 21 |
+| Write commit subjects that survive being turned into release notes | Notes that say what changed, in the user's terms | 22 |
+| Close an issue when users can see the fix, not when the code has it | A tracker that says what is still wrong for users | 22 |

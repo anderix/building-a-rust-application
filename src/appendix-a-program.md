@@ -127,9 +127,10 @@ groups, `\&` and `\\` for literal characters, and octal escapes.
 ## A.6 What it does not do
 
 GNU ed commands that ved does not implement: `u`, `=`, `k`, `f`, `x`, `z`, `!`,
-and `h`, and `wq`, which ved reads as `w` with the filename `q` (chapter 14). Address forms it does not accept: search addresses, `'x` marks,
-and offsets attached to an address, such as `$-5`. Pattern features it does not
-support: `\(...\)*`, `\{n,m\}`, character classes such as `[[:alpha:]]`, and
-word boundaries. Version 0.3.0 added search addresses and made matching work on
-characters instead of bytes; chapter 19 has the rest of the list, including
-what this book found that behaves differently from ed.
+and `h`, and `wq`, which ved reads as `w` with the filename `q` (chapter 14).
+Address forms it does not accept: search addresses, `'x` marks, and offsets
+attached to an address, such as `$-5`. Pattern features it does not support:
+`\(...\)*`, `\{n,m\}`, character classes such as `[[:alpha:]]`, and word
+boundaries. Version 0.3.0 added search addresses and made matching work on
+characters instead of bytes, and 0.4.0 fixed what this book found that behaves
+differently from ed; chapters 19 to 22 have both lists.
