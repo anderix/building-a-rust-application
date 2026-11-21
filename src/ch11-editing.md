@@ -34,7 +34,7 @@ joined 2 lines (2-3) into line 2
 3	five
 ```
 
-One thing in that session is wrong, twice, and it is not in the output of
+Something in that session is wrong, twice, and it is not in the output of
 `,n`. Section 11.6 is about it, and it is a plural.
 
 ## 11.1 Deleting
