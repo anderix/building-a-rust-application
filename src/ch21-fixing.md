@@ -108,8 +108,9 @@ it teaches is now what the program does. Replaying every session in the
 tutorial against the new binary, rather than reading it, found two more
 errors in it, a capture-group example that searched for text an earlier step
 had changed and a byte count that was never right. Both are now pasted from a
-run. The issue stays open (#16), because the tutorial is also published on
-two websites, and those copies change only when they are deployed.
+run. The issue (#16) stayed open until the evening, because the tutorial is
+also published on two websites, and those copies change only when they are
+deployed.
 
 ## 21.4 Build, then swap: `e`
 

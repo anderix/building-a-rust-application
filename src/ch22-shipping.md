@@ -36,13 +36,14 @@ said "as in ed" were corrected to name which ed, both before anything was
 pushed. Rewriting history that nobody else has is housekeeping. Rewriting
 history that somebody has pulled is a problem for them.
 
-The merge closed every issue whose fix said `Fixes #N`. Two issues were
-referenced with `Refs` instead and stayed open on purpose. The tutorial
-(#16) is fixed in the repository, but the copies on anderix.com and
-excelano.com are separate files that change only when those sites are
-deployed, and closing the issue before then would claim that a reader of
-either site sees the fix. The WinGet description (#30) is not in the
-repository at all, which section 22.5 explains.
+The merge closed every issue whose fix said `Fixes #N`. The tutorial's fix
+said `Refs #16` instead, and the issue stayed open on purpose. The tutorial
+was fixed in the repository, but the copies on anderix.com and excelano.com
+are separate files that change only when those sites are deployed, and
+closing the issue before then would have claimed that a reader of either site
+saw the fix. It closed when they were deployed, the same evening. The WinGet
+description (#30) has no commit at all, because it is not in the repository,
+which section 22.5 explains.
 
 ## 22.3 The release
 
@@ -157,10 +158,15 @@ call for a sentence of marketing copy, and it would be the wrong one for a
 security fix; a rule that forbids hand-editing needs to know which it is
 facing.
 
-**The websites** (#16). The two published copies of the tutorial still teach
-`write notes.txt`. They will be correct as soon as they are deployed, because
-0.4.0 implements `write`, so the fix for readers of the sites is a deploy, and
-the issue closes when it happens.
+**The websites** (#16). The two published copies of the tutorial are not the
+repository's file, so the release did not change them. Each got the same
+corrections by hand and was deployed that evening, and then the issue closed.
+Doing it turned up two more pages: ved's page on excelano.com and its card on
+the home page still called it a drop-in clone and said that any script
+written for ed runs unchanged, the claim the README had dropped in July.
+They were corrected in the same deploy. Chapter 18 counted six copies of
+ved's one-sentence description; these were two more that nobody had listed,
+and a correction reaches only the copies on the list.
 
 **Homebrew users.** Chapter 19 found that people who installed 0.2.1 with
 `brew` were left on it, with no way to learn that anything had changed. 0.4.0
@@ -177,17 +183,16 @@ linked from the chapter that found them.
 
 ## 22.6 The loop
 
-The loop chapter 19 described, someone reads the program closely, writes
-down what is wrong, and the list goes into the place where lists get done,
-has now gone around once, and it can be measured. Eighteen findings from
-chapters 10 to 19 went into the tracker on one day, and reading the
-specification added two more. Twenty issues were closed the same day, one
-commit each, each with a test whose expected value came from a reference, and
-a twenty-first, the tutorial, is fixed in the repository and waits for a
-deploy. Two more bugs were found by the tools that checked the fixes, and
-one was introduced by a fix and caught before it shipped. The release went
-out through four channels and verified each, and the notes that went with it
-had two mistakes that the next release can avoid.
+The loop chapter 19 described, someone reads the program closely, writes down
+what is wrong, and the list goes into the place where lists get done, has now
+gone around once, and it can be measured. Eighteen findings from chapters 10 to
+19 went into the tracker on one day, and reading the specification added two
+more. Twenty issues were closed the same day, one commit each, each with a test
+whose expected value came from a reference, and a twenty-first, the tutorial,
+closed when the websites were deployed. Two more bugs were found by the tools
+that checked the fixes, and one was introduced by a fix and caught before it
+shipped. The release went out through four channels and verified each, and the
+notes that went with it had two mistakes that the next release can avoid.
 
 None of that needed anything this book has not shown. The tracker is
 chapter 19's. The order is chapter 20's rule. The procedure is chapter 15's
