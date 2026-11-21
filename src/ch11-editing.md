@@ -227,17 +227,24 @@ The fix gives `Spec` a method for addressing a gap:
     /// and `i`. A range uses its second address, as ed does, and 0
     /// is allowed: `0a` puts text before the first line.
     pub fn resolve_target(&self, buf: &Buffer) -> Result<usize, String> {
-        let addr = match (&self.start, &self.end) {
-            (_, Some(a)) | (Some(a), None) => a,
+        let (first, last) = match (&self.start, &self.end) {
             (None, None) => return Ok(buf.current()),
+            (Some(s), None) => (s, s),
+            (Some(s), Some(e)) => (s, e),
+            (None, Some(_)) => unreachable!("parser never produces (None, Some)"),
         };
-        let n = resolve_one(addr, buf)?;
-        if n > buf.len() {
+        let (first, last) = (resolve_one(first, buf)?, resolve_one(last, buf)?);
+        if first > buf.len() || last > buf.len() {
             return Err("invalid address".to_string());
         }
-        Ok(n)
+        Ok(last)
     }
 ```
+
+Both addresses of a range are checked, though only the second is used, and
+neither has to come before the other. That is GNU ed's rule, and it is narrower
+than it looks: `9,3a` on a six-line buffer is an error, and `3,1a` appends
+after line 1.
 
 and both arms become the same shape:
 

@@ -16,7 +16,7 @@
 - [The Global Command](ch12-global.md)
 - [Files, and the Outside World](ch13-files.md)
 - [The Voice of the Program](ch14-voice.md)
-- [Testing]()
+- [Testing](ch15-testing.md)
 - [Documentation]()
 - [Release]()
 - [Packaging]()
